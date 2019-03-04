@@ -1,0 +1,15 @@
+<div class='app container-fluid'>
+    <div class="fo-header row">
+        <!-- {{employeeName}} -->
+        <div class="col-4"><img class="fo-image" src="../assets/ggk_icon.png"></div>
+        <div class="col-4 fo-heading">Food Tracker</div>
+        <div class="col-4"><button class="order-btn" *ngIf="login" (click)="logOut()">LogOut</button></div>
+        <!-- <div class="col-4" *ngIf="login">
+            <div class="row username">employee</div>
+            <div class="row logout-btn"><button class="order-btn" (click)="logOut()">LogOut</button></div>
+        </div> -->
+    </div>
+
+    <router-outlet></router-outlet>
+    <!-- <app-login></app-login> -->
+</div>

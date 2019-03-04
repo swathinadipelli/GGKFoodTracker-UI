@@ -1,0 +1,103 @@
+<app-loader></app-loader>
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div id="orders_list">
+  <div class="prvs-order">
+    <div class="prvs-order-heading">Your Previous Orders</div>
+    <div>
+      <p-table #dt [columns]="cols" [value]="previousOrders" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th class="data">S.No</th>
+            <th *ngFor="let col of columns" class="data" [pSortableColumn]="col.sortField">
+              {{col.header}}
+              <p-sortIcon *ngIf="col.sortField == 'orderDate'" [field]="col.sortField"></p-sortIcon>
+              <!-- <p-sortIcon [sortable]="true" [field]="col.sortField"></p-sortIcon> -->
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+          <tr>
+            <td class="data">{{i+1}}</td>
+            <td *ngFor="let col of columns">
+                <!-- <div class="data" *ngIf="col.field == 'serialNumber'">{{i}}</div> -->
+              <div class="data" *ngIf="col.field != 'orderDate'">{{rowData[col.field]}}</div>
+              <div class="data" *ngIf="col.field == 'orderDate'">{{rowData[col.field] | date:"dd/MM/yyyy"}}</div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="order-div">
+    <button class="order-btn" (click)="orderClick(1)">Order Now</button>
+  </div>
+</div>
+<br>
+<div id="management_list" *ngIf="managerScreen">
+  <app-order-management></app-order-management>
+</div>
+
+<div id="tracking_list" *ngIf="AdminScreen">
+  <app-order-tracking></app-order-tracking>
+</div>
+
+<div id="order" class="popup">
+  <div class="calender-heading">
+    <span class="orderHeading-date">Place Your Order</span>
+    <i (click)="orderClick(0)" class="pi pi-times-circle cancel-btn"></i>
+  </div>
+  <!-- <div *ngIf="!viewOrder">
+    <p-calendar [(ngModel)]="value" [inline]="true" [minDate]="minDate" class="calender" [required]="true"></p-calendar>
+    <div class="note">Your Orders Will be taken before 6:00 pm</div>
+    <div *ngIf="!correctTime" class="warning">Sorry!! Your order cannot be placed at this time</div>
+    <i (click)="nextClicked()" class="pi pi-arrow-right next-icon"></i>
+  </div> -->
+  <div>
+    <div style="display: inline;">
+        <div style="text-align: center; color:crimson">
+            <small>Note: Today's order can't be taken after 6</small>
+          </div>
+      <div class="wrapper">
+
+        <div class="equal center">
+          <div>
+            <label>Item: </label>
+          </div>
+          <div class="input-div">
+            <p-dropdown [options]="itemsList" id="item" [(ngModel)]="selectedItem" 
+              optionLabel="name"  class="orderItem-input"></p-dropdown>
+          </div>
+        </div>
+        
+        <div class="equal center">
+          <div>
+            <label>Date: </label>
+          </div>
+          <div class="input-div">
+              <!-- <input type="date" name="bday"> -->
+            <!-- <input type="date" [(ngModel)]="date" class="orderItem-input"> -->
+            <!-- <p-calendar [(ngModel)]="date" [required]="true" [showIcon]="true"></p-calendar> -->
+            <p-calendar [(ngModel)]="value"  dateFormat="dd/mm/yy" [disabledDates]="disableDate" [showIcon]="true"></p-calendar>
+
+          </div>
+        </div>
+        <div class="equal center">
+            <div>
+              <label>Manager: </label>
+            </div>
+            <div class="input-div">
+              <input [disabled]="true" class="orderItem-input" [(ngModel)]="managerName">
+            </div>
+          </div>
+      </div>
+      <button class="sendReqst-btn" (click)="placeOrder()">
+        Confirm Order
+      </button>
+      <button class="dlt-btn" (click)="orderClick(0)">
+        Cancel
+      </button>
+    </div>
+  </div>

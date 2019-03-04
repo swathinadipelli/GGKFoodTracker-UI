@@ -1,0 +1,107 @@
+<app-loader></app-loader>
+<div class="pictorials">
+  <div class="ui-g" style="margin-bottom:10px">
+    <span class="pie">
+      <p-radioButton name="group2" value="Gachibowli" label="Gachibowli" (click)="onLocationChange(1)" [(ngModel)]="locationSelected" inputId="preopt1"></p-radioButton>
+    </span>
+    <span class="pie">
+      <p-radioButton name="group2" value="Waverock" label="Waverock" (click)="onLocationChange(2)" [(ngModel)]="locationSelected" inputId="preopt2"></p-radioButton>
+    </span>
+    <span class="pie">
+      <p-radioButton name="group2" value="Uppal" label="Uppal" (click)="onLocationChange(3)" [(ngModel)]="locationSelected" inputId="preopt3"></p-radioButton>
+    </span>
+  </div>
+  <div class="countTables">
+    <span class="count-header">Count Table</span>
+    <p-table #dt [columns]="countTableColumns" class="count-table" [value]="countTable" [rows]="5">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" class="data" [pSortableColumn]="col.sortField">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns;">
+            <div class="data">{{rowData[col.field]}}</div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="piechart" *ngIf="countTable[0]">
+      <div class="pie" *ngIf=" countTable[locationVal].Meals == 0 && countTable[locationVal].Chapathi == 0">
+          <div  class="pie-error"> No Orders </div>
+      </div>
+    <div class="pie" *ngIf="(countTable[locationVal].Meals !== 0 || countTable[locationVal].Chapathi !== 0)">
+      <p-chart type="pie" class="pie" [data]="pieData"></p-chart>
+    </div>
+      <!-- <div class="pie" *ngIf="locationSelected == 'Gachibowli' && countTable[0].Meals == 0 && countTable[0].Chapathi == 0">
+          <div  class="pie-error"> No Orders </div>
+      </div>
+    <div class="pie" *ngIf="locationSelected =='Gachibowli' && (countTable[0].Meals !== 0 || countTable[0].Chapathi !== 0)">
+      <p-chart type="pie" class="pie" [data]="gachibowli_pie"></p-chart>
+    </div>
+    <div class="pie" *ngIf="locationSelected=='Waverock'">
+      <p-chart type="pie" class="pie" [data]="waverock_pie"></p-chart>
+    </div>
+    <div class="pie" *ngIf="locationSelected=='Waverock' && countTable[1].Meals == 0 && countTable[1].Chapathi == 0  ">
+        <div  class="pie-error"> No Orders </div>
+    </div>
+    <div class="pie" *ngIf="locationSelected=='Uppal'">
+      <p-chart type="pie" class="pie" [data]="uppal_pie"></p-chart>
+    </div>
+    <div class="pie" *ngIf="locationSelected=='Uppal' && countTable[2].Meals == 0 && countTable[2].Chapathi == 0  ">
+        <div  class="pie-error"> No Orders </div>
+    </div> -->
+    <!-- <p-chart type="pie" class="pie" [data]="waverock_pie"></p-chart>
+        <p-chart type="pie" class="pie" [data]="uppal_pie"></p-chart> -->
+  </div>
+  <!-- <div *ngIf="!countTable[0]">
+    <h1>no CT</h1>
+  </div> -->
+</div>
+
+<div>
+  <!-- <div class="export-div">
+  </div> -->
+  <div class="order-track" id="table">
+    <div class="track-heading">Track Employees for Dinner</div>
+
+    <div>
+      <p-table #dt [columns]="tableColumns" [value]="allEmployeeOrders" [paginator]="true" [rows]="5">
+          <ng-template pTemplate="caption">
+              <div class="ui-helper-clearfix">
+                  <button type="button" pButton icon="fa fa-file-o" exportFilename="fileName" iconPos="left" label="Export" (click)="dt.exportCSV()" style="float:right; background-color: #31708f"></button>
+              </div>
+          </ng-template>          
+          <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" class="data" [pSortableColumn]="col.sortField">
+              {{col.header}}
+              <p-dropdown *ngIf="col.field == 'location'" [options]="locationsSeach" [style]="{'width':'auto'}"
+                (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns;">
+              <div class="data">{{rowData[col.field]}}</div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+</div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<!-- <div class="ui-g" style="width:250px;margin-bottom:10px">
+    <div class="ui-g-12"><p-radioButton name="group2" value="Gachibowli" label="Gachibowli" [(ngModel)]="locationSelected" inputId="preopt1"></p-radioButton></div>
+    <div class="ui-g-12"><p-radioButton name="group2" value="Waverock" label="Waverock" [(ngModel)]="locationSelected" inputId="preopt2"></p-radioButton></div>
+    <div class="ui-g-12"><p-radioButton name="group2" value="Uppal" label="Uppal" [(ngModel)]="locationSelected" inputId="preopt3"></p-radioButton></div>
+</div> -->

@@ -1,0 +1,34 @@
+.order-mgnt {
+    padding: 20px
+}
+    
+.data {
+    text-align: center
+}
+    
+.mgnt-heading {
+    font-size: 25px;
+    padding: 7px;
+    text-align: center;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.mgnt-header {
+    height: 35px;
+    background-color: #e0e0e0;
+    display: table
+
+}
+
+.mgnt-header-heading {
+    display: table-cell;
+    text-align: center;
+}
+
+.mgnt-body {
+    display: table-cell;
+    height: 35px;
+    background-color: #efecec
+}

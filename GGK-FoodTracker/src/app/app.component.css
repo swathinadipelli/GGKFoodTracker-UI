@@ -1,0 +1,46 @@
+.fo-header {
+    height: 65px;
+    position: block;
+    background-color: #006288;
+    border-bottom: 2px solid #D35106;
+}
+
+.fo-image{
+    width: 146px;
+    height: 57px;
+    padding: 3px;
+}
+
+.fo-heading {
+    cursor: default;
+    text-align: center;
+    /* position: relative;
+    bottom: 58px; */
+    color: white;
+    font-size: 47px;
+}
+
+.app {
+    display: block
+}
+
+.order-btn {
+    float: right;
+    color: white;
+    cursor: pointer;
+    background-color: #006288;
+    padding: 4%;
+    /* border-radius: 15px; */
+    border: none;
+}
+
+.logout-btn{
+    padding-left:90%;
+    color: white;
+}
+   
+.username{
+    padding-left: 76%;
+        color: white;
+        font-size: 18px;  
+    }

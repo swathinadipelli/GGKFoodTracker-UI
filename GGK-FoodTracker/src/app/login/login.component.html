@@ -1,0 +1,30 @@
+<form [formGroup]="loginForm" class="form-group">
+
+  <div class="input">
+
+    <label>Username</label>
+    <input class="login-input" type="text" formControlName="userName">
+    <div *ngIf="loginForm.get('userName').invalid && loginForm.get('userName').touched">
+      <small *ngIf="loginForm.get('userName').errors?.required" class="text-danger">Username is required</small>
+    </div>
+  </div>
+
+  <div class="input">
+    <label>Password</label>
+    <input class="login-input" type="password" formControlName="password">
+    <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+      <small *ngIf="loginForm.get('password').errors?.required" class="text-danger">password required</small>
+    </div>
+    <div>
+      <small *ngIf="!login" class="text-danger">Login Failed</small>
+    </div>
+    <!-- <div>
+      <small *ngIf="!wrongPass && !login" class="text-danger">user not found</small>
+    </div> -->
+  </div>
+  <div class="input">
+    <button class="login-btn" type="submit" (click)="Login()"> Login</button>
+  </div>
+</form>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<app-loader></app-loader>

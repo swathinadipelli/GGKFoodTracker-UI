@@ -1,0 +1,39 @@
+<app-loader></app-loader>
+<div class="order-mgnt">
+  <div class="mgnt-heading">Requested Orders</div>
+  <div>
+    <p-table #dt [columns]="mgntCols" [value]="employeesOrders"  *ngIf="employeesOrders.length != 0" [paginator]="true" [rows]="5">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" class="data" [pSortableColumn]="col.sortField">
+            {{col.header}}
+            <p-sortIcon *ngIf="col.sortField == 'orderDate'" [field]="col.sortField"></p-sortIcon>
+            <p-dropdown *ngIf="col.field == 'locationName'" [options]="locations" [style]="{'width':'auto'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns;">
+            <div *ngIf="col.field == 'employeeName' || col.field == 'locationName' " class="data">{{rowData[col.field]}}</div>
+            <div *ngIf="col.field == 'orderDate' " class="data">{{rowData[col.field] | date:"dd/MM/yyyy"}} </div>
+            <div *ngIf="col.field == 'approve'" style="text-align: center;">
+              <button style="background-color: lightgreen; cursor: pointer" [disabled]="rowData['status'] != 'Pending'" (click)="managerAck(rowData['orderID'], 2, rowData['employeeName'])">
+                Approve 
+              </button>
+            </div>
+            <div *ngIf="col.field == 'reject'" style="text-align: center;">
+              <button style="background-color: crimson; color: white; cursor: pointer" [disabled]="rowData['status'] != 'Pending'" (click)="rowData['status'] != 'Pending'" (click)="managerAck(rowData['orderID'], 3, rowData['employeeName'])">
+                Reject
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div style="text-align: center; font-size: 25px" *ngIf="employeesOrders.length == 0">
+      No Pending Orders
+    </div>
+  </div>
+</div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

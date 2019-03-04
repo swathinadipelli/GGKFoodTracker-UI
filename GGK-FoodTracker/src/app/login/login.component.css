@@ -1,0 +1,59 @@
+:host {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+  
+  div.input {
+    position: relative; 
+    text-align: center;
+  }
+  
+  div.input label{
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    left: 5%;
+    background: white;
+    padding: 5px 2px;
+  }
+  
+  div.input input{
+    padding: 10px 20px;
+    font-size: 20px;
+    outline: 0;
+  
+  }
+  
+  div.input {
+    margin-top: 20px;
+  }
+  
+  a{
+    color:cornflowerblue;
+    font-size:14px;
+    padding-left: 260px
+  }
+
+  .form-group {
+    top: 200px;
+    position: relative;
+  }
+  
+  button{
+    padding: 10px 20px;
+  }
+
+  .login-btn {
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #006288;
+  }
+
+  .login-input {
+    width: 320px;
+    font-size: 15px;
+    height: 66px;
+  }
